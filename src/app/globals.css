@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+:root {
+  --background: #010d23;
+  --foreground: #ffffff;
+  --dra-ink: #010d23;
+  --dra-dark: #010d23;
+  --dra-navy: #03223f;
+  --dra-muted: #03223f;
+  --dra-teal: #038bbb;
+  --dra-mint: #03223f;
+  --dra-sky: #038bbb;
+  --dra-cream: #fccb6f;
+  --dra-warm: #fccb6f;
+  --dra-gold: #e19f41;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-josefin-sans), "Josefin Sans", ui-sans-serif, system-ui,
+    -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+::selection {
+  background: var(--dra-cream);
+  color: var(--dra-ink);
+}
+
+@keyframes card-rise-in {
+  from {
+    transform: translateY(16px);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+.treatment-card,
+.experience-card {
+  animation: card-rise-in 0.58s cubic-bezier(0.22, 1, 0.36, 1) both;
+  will-change: transform, box-shadow;
+}
+
+.treatment-card:hover,
+.experience-card:hover,
+.treatment-card:active,
+.experience-card:active {
+  transform: translateY(-0.35rem);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .treatment-card,
+  .experience-card {
+    animation: none;
+    will-change: auto;
+  }
+
+  .treatment-card:hover,
+  .experience-card:hover {
+    transform: none;
+  }
+}
