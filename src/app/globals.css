@@ -40,20 +40,35 @@ body {
   color: var(--dra-ink);
 }
 
-@keyframes card-rise-in {
-  from {
-    transform: translateY(16px);
+@keyframes whatsapp-soft-pulse {
+  0%,
+  100% {
+    box-shadow: 0 24px 48px rgb(0 0 0 / 0.3), 0 0 0 0 rgb(37 211 102 / 0.38);
   }
 
-  to {
-    transform: translateY(0);
+  50% {
+    box-shadow: 0 24px 48px rgb(0 0 0 / 0.3), 0 0 0 10px rgb(37 211 102 / 0);
   }
 }
 
 .treatment-card,
 .experience-card {
-  animation: card-rise-in 0.58s cubic-bezier(0.22, 1, 0.36, 1) both;
   will-change: transform, box-shadow;
+}
+
+.reveal-on-view {
+  opacity: 0;
+  transform: translateY(22px) scale(0.985);
+  transition:
+    opacity 0.62s ease,
+    transform 0.62s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-on-view.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  will-change: auto;
 }
 
 .treatment-card:hover,
@@ -63,9 +78,16 @@ body {
   transform: translateY(-0.35rem);
 }
 
+.whatsapp-float {
+  animation: whatsapp-soft-pulse 2.7s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .treatment-card,
-  .experience-card {
+  .reveal-on-view,
+  .whatsapp-float {
+    opacity: 1;
+    transform: none;
+    transition: none;
     animation: none;
     will-change: auto;
   }

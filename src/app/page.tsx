@@ -15,6 +15,7 @@ import {
   Stethoscope,
 } from "lucide-react";
 import { MobileMenu } from "./mobile-menu";
+import { RevealOnView } from "./reveal-on-view";
 
 const heroImage = "/hero-consulta.webp";
 const whatsappDisplay = "+54 9 3794 02-0769";
@@ -272,21 +273,23 @@ export default function Home() {
               const Icon = item.icon;
 
               return (
-                <article
-                  className="treatment-card group rounded-lg border border-[var(--dra-teal)]/35 bg-[var(--dra-dark)] p-6 shadow-sm shadow-black/20 transition-all duration-300 ease-out hover:-translate-y-1 hover:border-[var(--dra-cream)]/65 hover:bg-[var(--dra-navy)] hover:shadow-xl hover:shadow-[var(--dra-teal)]/20"
+                <RevealOnView
                   key={item.title}
-                  style={{ animationDelay: `${index * 70}ms` }}
+                  delay={index * 80}
+                  className="h-full"
                 >
-                  <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--dra-cream)] text-[var(--dra-dark)] transition-all duration-300 ease-out group-hover:scale-105 group-hover:bg-[var(--dra-teal)] group-hover:text-white">
-                    <Icon size={23} />
-                  </span>
-                  <h3 className="mt-5 text-xl font-black tracking-normal text-[var(--dra-cream)] transition-colors duration-300 group-hover:text-white">
-                    {item.title}
-                  </h3>
-                  <p className="mt-3 leading-7 text-white/72 transition-colors duration-300 group-hover:text-white/82">
-                    {item.text}
-                  </p>
-                </article>
+                  <article className="treatment-card group h-full rounded-lg border border-[var(--dra-teal)]/35 bg-[var(--dra-dark)] p-6 shadow-sm shadow-black/20 transition-all duration-300 ease-out hover:-translate-y-1 hover:border-[var(--dra-cream)]/65 hover:bg-[var(--dra-navy)] hover:shadow-xl hover:shadow-[var(--dra-teal)]/20">
+                    <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--dra-cream)] text-[var(--dra-dark)] transition-all duration-300 ease-out group-hover:scale-105 group-hover:bg-[var(--dra-teal)] group-hover:text-white">
+                      <Icon size={23} />
+                    </span>
+                    <h3 className="mt-5 text-xl font-black tracking-normal text-[var(--dra-cream)] transition-colors duration-300 group-hover:text-white">
+                      {item.title}
+                    </h3>
+                    <p className="mt-3 leading-7 text-white/72 transition-colors duration-300 group-hover:text-white/82">
+                      {item.text}
+                    </p>
+                  </article>
+                </RevealOnView>
               );
             })}
           </div>
@@ -326,24 +329,26 @@ export default function Home() {
 
           <div className="grid gap-4 sm:grid-cols-3">
             {gallery.map((item, index) => (
-              <figure
+              <RevealOnView
                 key={item.title}
-                className="experience-card group overflow-hidden rounded-lg border border-[var(--dra-dark)]/20 bg-[var(--dra-navy)] shadow-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:border-[var(--dra-cream)]/60 hover:shadow-xl hover:shadow-[var(--dra-dark)]/25"
-                style={{ animationDelay: `${index * 90}ms` }}
+                delay={index * 110}
+                className="h-full"
               >
-                <div className="relative h-80 w-full sm:h-96">
-                  <Image
-                    src={item.src}
-                    alt={item.title}
-                    fill
-                    sizes="(min-width: 1024px) 24vw, (min-width: 640px) 30vw, 100vw"
-                    className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
-                  />
-                </div>
-                <figcaption className="border-t border-[var(--dra-teal)]/40 px-4 py-3 text-sm font-black text-white transition-colors duration-300 group-hover:text-[var(--dra-cream)]">
-                  {item.title}
-                </figcaption>
-              </figure>
+                <figure className="experience-card group h-full overflow-hidden rounded-lg border border-[var(--dra-dark)]/20 bg-[var(--dra-navy)] shadow-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:border-[var(--dra-cream)]/60 hover:shadow-xl hover:shadow-[var(--dra-dark)]/25">
+                  <div className="relative h-80 w-full sm:h-96">
+                    <Image
+                      src={item.src}
+                      alt={item.title}
+                      fill
+                      sizes="(min-width: 1024px) 24vw, (min-width: 640px) 30vw, 100vw"
+                      className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                    />
+                  </div>
+                  <figcaption className="border-t border-[var(--dra-teal)]/40 px-4 py-3 text-sm font-black text-white transition-colors duration-300 group-hover:text-[var(--dra-cream)]">
+                    {item.title}
+                  </figcaption>
+                </figure>
+              </RevealOnView>
             ))}
           </div>
         </div>
@@ -461,6 +466,7 @@ export default function Home() {
       </section>
 
       <Footer />
+      <FloatingWhatsApp />
     </main>
   );
 }
@@ -651,5 +657,29 @@ function Footer() {
         </div>
       </div>
     </footer>
+  );
+}
+
+function FloatingWhatsApp() {
+  return (
+    <a
+      href={whatsappUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Enviar WhatsApp a Dra. Szachraj Casco Mayra"
+      className="whatsapp-float group fixed bottom-[calc(1rem+env(safe-area-inset-bottom))] right-4 z-[80] inline-flex h-16 w-16 items-center justify-center rounded-full border border-white/60 bg-[#25d366] p-2 text-sm font-black text-white shadow-2xl shadow-black/30 transition duration-300 hover:-translate-y-1 hover:border-white/80 hover:bg-[#1ebe5d] focus:outline-none focus:ring-4 focus:ring-[var(--dra-cream)]/45 sm:bottom-7 sm:right-7 sm:w-auto sm:gap-3 sm:pr-4"
+    >
+      <span className="relative flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-full bg-white text-[#25d366] shadow-sm">
+        <MessageCircle size={28} strokeWidth={2.6} />
+        <Image
+          src="/whatsapp-floating.avif"
+          alt=""
+          fill
+          sizes="48px"
+          className="object-cover"
+        />
+      </span>
+      <span className="hidden pr-1 sm:inline">WhatsApp</span>
+    </a>
   );
 }
