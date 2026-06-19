@@ -24,10 +24,11 @@ const instagramUrl = "https://www.instagram.com/esteticamedicaszachraj";
 const address =
   "Fray Jos\u00e9 de la Quintana 1272, W3400BGP Corrientes - Consultorio 3";
 const schedule = "Lunes a s\u00e1bado de 9 a 18 hs";
-const mapsQuery = encodeURIComponent(
-  "Fray Jos\u00e9 de la Quintana 1272 W3400BGP Corrientes Consultorio 3",
-);
-const mapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${mapsQuery}`;
+const mapsSearchAddress = "Fray Jos\u00e9 de la Quintana 1272, Corrientes, Argentina";
+const mapsQuery = encodeURIComponent(mapsSearchAddress);
+const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${mapsQuery}`;
+const mapsDirectionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${mapsQuery}`;
+const mapsEmbedUrl = `https://www.google.com/maps?q=${mapsQuery}&z=17&output=embed`;
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://szachrajesteticamedica.netlify.app";
 
@@ -446,13 +447,13 @@ export default function Home() {
             <div className="relative h-[420px] w-full sm:h-[500px]">
               <iframe
                 title={"Mapa de ubicaci\u00f3n de Dra. Szachraj Casco Mayra"}
-                src={`https://www.google.com/maps?q=${mapsQuery}&output=embed`}
+                src={mapsEmbedUrl}
                 className="absolute inset-0 h-full w-full border-0"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               />
               <a
-                href={mapsUrl}
+                href={mapsDirectionsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="absolute bottom-4 left-4 inline-flex items-center justify-center gap-2 rounded-full border border-white/55 bg-[var(--dra-cream)] px-5 py-3 text-sm font-black text-[var(--dra-dark)] shadow-lg shadow-black/20 transition hover:border-white/75 hover:bg-[var(--dra-gold)]"
